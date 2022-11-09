@@ -3,7 +3,7 @@ class main {
   public static void main(String[] args) {
     Braille braille = new Braille();
     // braille.printAllBrailleAlphabets();
-    System.out.println("Some Braille Text\t" + braille.toBraille("Hello World this is some text in braille"));
+    System.out.println("Some Braille Text\t" + braille.stringToBraille("Hello World this is some text in braille"));
     System.out.println("Translate Braille\t" + braille.brailleToString("⠓⠑⠇⠇⠕ ⠺⠕⠗⠇⠙ ⠞⠓⠊⠎ ⠊⠎ ⠎⠕⠍⠑ ⠞⠑⠭⠞ ⠊⠝ ⠃⠗⠁⠊⠇⠇⠑"));
   }
 }
@@ -28,11 +28,11 @@ class Braille {
     System.out.println();
   }
 
-  String toBraille(String rawText) {
-    rawText = rawText.toLowerCase();
+  String stringToBraille(String text) {
+    text = text.toLowerCase();
     String result = "";
-    for (int i = 0; i < rawText.length(); i++) {
-      int index = rawText.charAt(i) - 97;
+    for (int i = 0; i < text.length(); i++) {
+      int index = text.charAt(i) - 97;
       if (index < 0) {
         result += " ";
       } else {
@@ -42,10 +42,10 @@ class Braille {
     return result;
   }
 
-  String brailleToString(String brailleText) {
+  String brailleToString(String braille_text) {
     String result = "";
-    for (int i = 0; i < brailleText.length(); i++) {
-      char c = brailleText.charAt(i);
+    for (int i = 0; i < braille_text.length(); i++) {
+      char c = braille_text.charAt(i);
       for (int j = 0; j < Braille.length; j++) {
         if (c == ' ') {
           result += ' ';
