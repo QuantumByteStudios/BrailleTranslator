@@ -1,21 +1,62 @@
+import java.io.*;
+import java.io.FileReader;
 
 class main {
   public static void main(String[] args) {
     Braille braille = new Braille();
     // braille.printAllBrailleAlphabets();
-    System.out.println("Some Braille Text\t" + braille.stringToBraille("Hello World this is some text in braille"));
-    System.out.println("Translate Braille\t" + braille.brailleToString("⠓⠑⠇⠇⠕ ⠺⠕⠗⠇⠙ ⠞⠓⠊⠎ ⠊⠎ ⠎⠕⠍⠑ ⠞⠑⠭⠞ ⠊⠝ ⠃⠗⠁⠊⠇⠇⠑"));
+    // System.out.println("Some Braille Text\t" + braille.stringToBraille("Hello
+    // World this is some text in braille"));
+    // System.out.println("Translate Braille\t" + braille.brailleToString("⠓⠑⠇⠇⠕
+    // ⠺⠕⠗⠇⠙ ⠞⠓⠊⠎ ⠊⠎ ⠎⠕⠍⠑ ⠞⠑⠭⠞ ⠊⠝ ⠃⠗⠁⠊⠇⠇⠑"));
+    braille.sourceFileToBraille("src/brailleRaw.txt");
+    braille.sourceFileToBraille("src/brailleRaw.txt", "src/brailleTranslated.txt");
   }
 }
 
 class Braille {
 
-  static String Braille[] = { "⠁", "⠃", "⠉", "⠙", "⠑", "⠋", "⠛", "⠓", "⠊", "⠚", "⠅", "⠇", "⠍", "⠝", "⠕", "⠏", "⠟", "⠗",
-      "⠎",
-      "⠞", "⠥", "⠧", "⠺", "⠭", "⠽", "⠵" };
+  static String Braille[] = {
+      "⠁", "⠃", "⠉", "⠙", "⠑", "⠋", "⠛", "⠓", "⠊",
+      "⠚", "⠅", "⠇", "⠍", "⠝", "⠕", "⠏", "⠟", "⠗",
+      "⠎", "⠞", "⠥", "⠧", "⠺", "⠭", "⠽", "⠵"
+  };
 
   Braille() {
     // System.out.println("Braille Translator\n------------------");
+  }
+
+  void sourceFileToBraille(String Source) {
+    // Console Output
+    char[] array = new char[100];
+    try {
+      FileReader input = new FileReader(Source);
+      input.read(array);
+      System.out.println("Raw File:");
+      System.out.println(array);
+      System.out.println("Translated File:");
+      String translatedData = sumCharToString(array);
+      System.out.println(brailleToString(translatedData));
+      input.close();
+    } catch (Exception e) {
+      e.getStackTrace();
+    }
+  }
+
+  void sourceFileToBraille(String Source, String Destination) {
+    // Sourced Output
+    char[] array = new char[100];
+    try {
+      FileReader input = new FileReader(Source);
+      input.read(array);
+      String translatedData = sumCharToString(array);
+      input.close();
+      FileWriter output = new FileWriter(Destination);
+      output.write(translatedData);
+      output.close();
+    } catch (Exception e) {
+      e.getStackTrace();
+    }
   }
 
   void printAllBrailleAlphabets() {
@@ -54,6 +95,14 @@ class Braille {
           result += (char) (j + 97);
         }
       }
+    }
+    return result;
+  }
+
+  String sumCharToString(char array[]) {
+    String result = "";
+    for (int i = 0; i < array.length; i++) {
+      result += array[i];
     }
     return result;
   }
