@@ -14,7 +14,7 @@ class main {
      */
     System.out.print(colors.RED + "\nPrint All Braille Alphabets" + colors.RESET);
     System.out.println(" ► Function: " + colors.CYAN + "printAllBrailleAlphabets();" + colors.RESET);
-    braille.printAllBrailleAlphabets();
+    braille.BrailleAlphabets();
 
     /*
      * Convert Braille To text
@@ -178,7 +178,7 @@ class Braille {
     return 0;
   }
 
-  void printAllBrailleAlphabets() {
+  void BrailleAlphabets() {
     System.out.println("All Braille Alphabets");
     char a = 'a';
     for (int i = 0; i < Braille.length; i++) {
